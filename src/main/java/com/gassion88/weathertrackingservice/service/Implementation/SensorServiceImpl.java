@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 @Component
 @Service
 public class SensorServiceImpl implements SensorService {
-
     private final SensorRepository sensorRepository;
 
     @Autowired
@@ -21,15 +20,18 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     public void registerSensor(Sensor sensor) {
-        if(isSensorRegistered(sensor.getName())) {
+        if(findSensorByName(sensor.getName())) {
             throw new SensorIsAlreadyRegisteredException();
         }
 
         sensorRepository.save(sensor);
     }
 
-    @Override
-    public boolean isSensorRegistered(String sensorName) {
+    public boolean findSensorByName(String sensorName) {
         return sensorRepository.findByName(sensorName).isPresent();
+    }
+
+    public boolean findSensorById(Long id) {
+        return sensorRepository.findById(id).isPresent();
     }
 }

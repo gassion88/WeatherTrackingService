@@ -6,5 +6,7 @@ public interface SensorService {
 
     void registerSensor(Sensor sensor);
 
-    boolean isSensorRegistered(String sensorName);
+    boolean findSensorByName(String sensorName);
+
+    boolean findSensorById(Long id);
 }
