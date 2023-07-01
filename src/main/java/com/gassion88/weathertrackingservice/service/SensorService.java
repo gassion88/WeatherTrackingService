@@ -2,11 +2,13 @@ package com.gassion88.weathertrackingservice.service;
 
 import com.gassion88.weathertrackingservice.model.Sensor;
 
+import java.util.Optional;
+
 public interface SensorService {
 
     void registerSensor(Sensor sensor);
 
-    boolean findSensorByName(String sensorName);
+    Optional<Sensor> findSensorByName(String sensorName);
 
-    boolean findSensorById(Long id);
+    Optional<Sensor> findSensorById(Long id);
 }

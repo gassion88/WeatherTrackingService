@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Component
 @Service
 public class SensorServiceImpl implements SensorService {
@@ -20,18 +22,18 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     public void registerSensor(Sensor sensor) {
-        if(findSensorByName(sensor.getName())) {
+        if(findSensorByName(sensor.getName()).isPresent()) {
             throw new SensorIsAlreadyRegisteredException();
         }
 
         sensorRepository.save(sensor);
     }
 
-    public boolean findSensorByName(String sensorName) {
-        return sensorRepository.findByName(sensorName).isPresent();
+    public Optional<Sensor> findSensorByName(String sensorName) {
+        return sensorRepository.findByName(sensorName);
     }
 
-    public boolean findSensorById(Long id) {
-        return sensorRepository.findById(id).isPresent();
+    public Optional<Sensor> findSensorById(Long id) {
+        return sensorRepository.findById(id);
     }
 }
