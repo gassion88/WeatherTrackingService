@@ -30,12 +30,10 @@ public class SensorController {
                                                       BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             String errorMessage = bindingResult.getFieldError("name").getDefaultMessage();
-
             throw new SensorNotCreatedException(errorMessage);
         }
 
         Sensor sensor = objectMapper.convertValue(sensorDTO, Sensor.class);
-
         sensorService.registerSensor(sensor);
 
         return ResponseEntity.ok(HttpStatus.CREATED);

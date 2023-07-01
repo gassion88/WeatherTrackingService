@@ -28,6 +28,7 @@ public class SensorServiceImpl implements SensorService {
         sensorRepository.save(sensor);
     }
 
+    @Override
     public boolean isSensorRegistered(Sensor sensor) {
         return sensorRepository.findByName(sensor.getName()).isPresent();
     }
