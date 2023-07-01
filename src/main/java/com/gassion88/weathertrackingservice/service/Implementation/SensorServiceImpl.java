@@ -21,7 +21,7 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     public void registerSensor(Sensor sensor) {
-        if(isSensorRegistered(sensor)) {
+        if(isSensorRegistered(sensor.getName())) {
             throw new SensorIsAlreadyRegisteredException();
         }
 
@@ -29,7 +29,7 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public boolean isSensorRegistered(Sensor sensor) {
-        return sensorRepository.findByName(sensor.getName()).isPresent();
+    public boolean isSensorRegistered(String sensorName) {
+        return sensorRepository.findByName(sensorName).isPresent();
     }
 }
