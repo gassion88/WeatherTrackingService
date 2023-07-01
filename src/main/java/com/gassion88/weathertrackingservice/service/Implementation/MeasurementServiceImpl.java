@@ -25,10 +25,6 @@ public class MeasurementServiceImpl implements MeasurementService {
 
     @Override
     public void saveMeasurement(Measurement measurement) {
-        if (!sensorService.findSensorById(measurement.getId())) {
-            throw new SensorNotRegisteredException();
-        }
-
         measurement.setMeasurementDateTime(new Date());
         measurementRepository.save(measurement);
     }
