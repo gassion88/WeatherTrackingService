@@ -1,6 +1,7 @@
 package com.gassion88.weathertrackingservice.util.error_handler;
 
 import com.gassion88.weathertrackingservice.dto.ErrorResponseDTO;
+import com.gassion88.weathertrackingservice.util.error.MeasurementNotSavedException;
 import com.gassion88.weathertrackingservice.util.error.SensorIsAlreadyRegisteredException;
 import com.gassion88.weathertrackingservice.util.error.SensorNotCreatedException;
 import com.gassion88.weathertrackingservice.util.error.SensorNotRegisteredException;
@@ -28,6 +29,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler({ SensorNotRegisteredException.class })
     public ResponseEntity<ErrorResponseDTO> handleSensorNotRegisteredException (
+            Exception ex) {
+        return new ResponseEntity<>(
+                new ErrorResponseDTO(ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ MeasurementNotSavedException.class })
+    public ResponseEntity<ErrorResponseDTO> handleMeasurementNotSavedException (
             Exception ex) {
         return new ResponseEntity<>(
                 new ErrorResponseDTO(ex.getMessage()), HttpStatus.BAD_REQUEST);
