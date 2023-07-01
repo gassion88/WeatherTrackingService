@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "measurment")
+@Table(name = "measurement")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,5 +30,5 @@ public class Measurement {
 
     @OneToOne
     @JoinColumn(name = "sensor_id")
-    private Sensor sensorID;
+    private Sensor sensor;
 }
