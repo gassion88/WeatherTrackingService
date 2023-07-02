@@ -71,4 +71,9 @@ public class MeasurementController {
 
         return responseDTO;
     }
+
+    @GetMapping("/rainydayscount")
+    public int rainyDaysCount() {
+        return measurementService.getRainyDaysCount();
+    }
 }

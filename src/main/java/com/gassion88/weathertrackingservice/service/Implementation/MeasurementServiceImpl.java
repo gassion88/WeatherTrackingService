@@ -33,7 +33,7 @@ public class MeasurementServiceImpl implements MeasurementService {
 
     @Override
     public int getRainyDaysCount() {
-        return 0;
+        return measurementRepository.countByRainingTrue();
     }
 
     @Override
