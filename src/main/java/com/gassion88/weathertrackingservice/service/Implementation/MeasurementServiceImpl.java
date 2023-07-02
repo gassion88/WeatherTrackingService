@@ -39,12 +39,5 @@ public class MeasurementServiceImpl implements MeasurementService {
     @Override
     public List<Measurement> getAllMeasurements() {
         return measurementRepository.findAll();
-//        List<MeasurementResponseDTO> responseDTO = Collections.emptyList();
-//
-//        for (Measurement measurement : measurements) {
-//            MeasurementResponseDTO mappedDTO = o
-//            responseDTO.add(ob)
-//        }
-
     }
 }
