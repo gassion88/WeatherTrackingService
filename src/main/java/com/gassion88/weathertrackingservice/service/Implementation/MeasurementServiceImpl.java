@@ -1,5 +1,6 @@
 package com.gassion88.weathertrackingservice.service.Implementation;
 
+import com.gassion88.weathertrackingservice.dto.MeasurementResponseDTO;
 import com.gassion88.weathertrackingservice.model.Measurement;
 import com.gassion88.weathertrackingservice.repository.MeasurementRepository;
 import com.gassion88.weathertrackingservice.service.MeasurementService;
@@ -8,6 +9,7 @@ import com.gassion88.weathertrackingservice.util.error.SensorNotRegisteredExcept
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +38,13 @@ public class MeasurementServiceImpl implements MeasurementService {
 
     @Override
     public List<Measurement> getAllMeasurements() {
-        return null;
+        return measurementRepository.findAll();
+//        List<MeasurementResponseDTO> responseDTO = Collections.emptyList();
+//
+//        for (Measurement measurement : measurements) {
+//            MeasurementResponseDTO mappedDTO = o
+//            responseDTO.add(ob)
+//        }
+
     }
 }

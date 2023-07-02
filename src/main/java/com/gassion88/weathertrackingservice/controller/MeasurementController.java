@@ -1,6 +1,7 @@
 package com.gassion88.weathertrackingservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gassion88.weathertrackingservice.dto.MeasurementResponseDTO;
 import com.gassion88.weathertrackingservice.dto.SaveMeasurementRequestDTO;
 import com.gassion88.weathertrackingservice.model.Measurement;
 import com.gassion88.weathertrackingservice.model.Sensor;
@@ -13,11 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -56,5 +57,18 @@ public class MeasurementController {
         measurementService.saveMeasurement(measurement);
 
         return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public List<MeasurementResponseDTO> getAllMeasurements() {
+        List<Measurement> measurements = measurementService.getAllMeasurements();
+
+        List<MeasurementResponseDTO> responseDTO = new ArrayList<>();
+        for (Measurement measurement : measurements) {
+            MeasurementResponseDTO measurementResponseDTO = objectMapper.convertValue(measurement, MeasurementResponseDTO.class);
+            responseDTO.add(measurementResponseDTO);
+        }
+
+        return responseDTO;
     }
 }
