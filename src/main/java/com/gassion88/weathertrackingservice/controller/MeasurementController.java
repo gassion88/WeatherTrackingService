@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/measurement")
@@ -61,13 +62,8 @@ public class MeasurementController {
     public List<MeasurementResponseDTO> getAllMeasurements() {
         List<Measurement> measurements = measurementService.getAllMeasurements();
 
-        List<MeasurementResponseDTO> responseDTO = new ArrayList<>();
-        for (Measurement measurement : measurements) {
-            MeasurementResponseDTO measurementResponseDTO = objectMapper.convertValue(measurement, MeasurementResponseDTO.class);
-            responseDTO.add(measurementResponseDTO);
-        }
-
-        return responseDTO;
+        return measurements.stream().map(measurement -> objectMapper.convertValue(measurement, MeasurementResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/discountability")
