@@ -39,8 +39,7 @@ public class MeasurementController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> saveMeasurement(@Valid @RequestBody SaveMeasurementRequestDTO measurementDTO,
-                                                      BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> saveMeasurement(@Valid @RequestBody SaveMeasurementRequestDTO measurementDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             String errorMessage = bindingResult.getFieldError().getDefaultMessage();
             throw new MeasurementNotSavedException(errorMessage);
@@ -71,7 +70,7 @@ public class MeasurementController {
         return responseDTO;
     }
 
-    @GetMapping("/rainydayscount")
+    @GetMapping("/discountability")
     public int rainyDaysCount() {
         return measurementService.getRainyDaysCount();
     }
