@@ -51,7 +51,6 @@ public class MeasurementController {
             throw new SensorNotRegisteredException();
         }
 
-
         Measurement measurement = objectMapper.convertValue(measurementDTO, Measurement.class);
         measurement.setSensor(sensor.get());
         measurementService.saveMeasurement(measurement);

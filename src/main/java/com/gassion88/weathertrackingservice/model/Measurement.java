@@ -28,7 +28,7 @@ public class Measurement {
     @Temporal(TemporalType.TIMESTAMP)
     private Date measurementDateTime;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "sensor_id")
     private Sensor sensor;
 }
