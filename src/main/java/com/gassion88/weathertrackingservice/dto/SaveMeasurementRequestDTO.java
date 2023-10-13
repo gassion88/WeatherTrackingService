@@ -1,11 +1,14 @@
 package com.gassion88.weathertrackingservice.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SaveMeasurementRequestDTO {
-
     @NotNull(message = "Значение не может быть пустым")
     @Min(value = -100, message = "Incorrect value")
     @Max(value = 100, message = "Incorrect value")
