@@ -40,19 +40,12 @@ public class MeasurementController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> saveMeasurement(@Valid @RequestBody SaveMeasurementRequestDTO measurementDTO, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            String errorMessage = bindingResult.getFieldError().getDefaultMessage();
-            throw new MeasurementNotSavedException(errorMessage);
-        }
-
-        Optional<Sensor> sensor = sensorService.findSensorByName(measurementDTO.getSensor().getName());
-        if (sensor.isEmpty()) {
-            throw new SensorNotRegisteredException();
-        }
+    public ResponseEntity<HttpStatus> saveMeasurement(@Valid @RequestBody SaveMeasurementRequestDTO measurementDTO) {
+        Sensor sensor = sensorService.findSensorByName(measurementDTO.getSensor().getName())
+                .orElseThrow(SensorNotRegisteredException::new);
 
         Measurement measurement = objectMapper.convertValue(measurementDTO, Measurement.class);
-        measurement.setSensor(sensor.get());
+        measurement.setSensor(sensor);
         measurementService.saveMeasurement(measurement);
 
         return ResponseEntity.ok(HttpStatus.CREATED);
